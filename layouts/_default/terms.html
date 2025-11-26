@@ -1,0 +1,25 @@
+{{ define "main" }}
+<div class="container">
+    {{ if site.Params.showBreadcrumbs }}
+        {{ partial "breadcrumbs.html" . }}
+    {{ end }}
+    
+    <header class="post-header">
+        <h1 class="post-title">{{ .Page.Title }}</h1>
+    </header>
+    
+    <div class="terms">
+        <ul class="terms-list">
+            {{ range .Pages.ByTitle }}
+            <li class="terms-item">
+                <a href="{{ .Permalink }}">
+                    {{ .Title }}
+                    <span class="terms-count">{{ len .Pages }}</span>
+                </a>
+            </li>
+            {{ end }}
+        </ul>
+    </div>
+</div>
+{{ end }}
+
