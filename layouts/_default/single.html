@@ -1,0 +1,44 @@
+{{ define "main" }}
+<div class="container">
+    {{ if site.Params.showBreadcrumbs }}
+        {{ partial "breadcrumbs.html" . }}
+    {{ end }}
+    
+    <article class="post-single">
+        <header class="post-header">
+            {{- $image := .Params.image | default .Params.featured_image }}
+            {{- if $image }}
+            <div class="post-featured-image">
+                <img src="{{ $image | absURL }}" alt="{{ .Params.image_alt | default .Title }}" />
+            </div>
+            {{- end }}
+            
+            <h1 class="post-title">{{ .Page.Title }}</h1>
+            
+            {{ partial "post_meta.html" . }}
+        </header>
+        
+        {{ if .Param "showToc" }}
+            {{ if and (.TableOfContents) (ne .TableOfContents "<nav id=\"TableOfContents\"></nav>") }}
+                <details class="toc">
+                    <summary>Table of Contents</summary>
+                    {{ .TableOfContents }}
+                </details>
+            {{ end }}
+        {{ end }}
+        
+        <div class="post-content">
+            {{ .Content }}
+        </div>
+        
+        {{ if site.Params.showPostNavLinks }}
+            {{ partial "post_nav_links.html" . }}
+        {{ end }}
+        
+        {{ if .Param "showShareButtons" }}
+            {{ partial "share_icons.html" . }}
+        {{ end }}
+    </article>
+</div>
+{{ end }}
+
