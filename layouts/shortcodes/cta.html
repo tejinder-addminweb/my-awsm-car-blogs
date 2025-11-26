@@ -1,0 +1,66 @@
+{{- $cta := site.Params.cta }}
+{{- $title := .Get "title" | default $cta.title }}
+{{- $description := .Get "description" | default $cta.description }}
+{{- $primaryText := .Get "primaryText" | default $cta.primaryButton.text }}
+{{- $primaryUrl := .Get "primaryUrl" | default $cta.primaryButton.url }}
+{{- $primaryExternal := false }}
+{{- if .Get "primaryExternal" }}
+  {{- $primaryExternal = (eq (.Get "primaryExternal") "true") }}
+{{- else }}
+  {{- if $cta.primaryButton }}{{- $primaryExternal = $cta.primaryButton.external }}{{- end }}
+{{- end }}
+{{- $secondaryText := .Get "secondaryText" | default $cta.secondaryButton.text }}
+{{- $secondaryUrl := .Get "secondaryUrl" | default $cta.secondaryButton.url }}
+{{- $secondaryExternal := false }}
+{{- if .Get "secondaryExternal" }}
+  {{- $secondaryExternal = (eq (.Get "secondaryExternal") "true") }}
+{{- else }}
+  {{- if $cta.secondaryButton }}{{- $secondaryExternal = $cta.secondaryButton.external }}{{- end }}
+{{- end }}
+{{- $footerText := .Get "footerText" | default $cta.footerText }}
+
+{{- $hasTitle := $title }}
+{{- $hasDescription := $description }}
+{{- $hasPrimaryButton := and $primaryText $primaryUrl }}
+{{- $hasSecondaryButton := and $secondaryText $secondaryUrl }}
+{{- $hasFooter := $footerText }}
+{{- $hasContent := or $hasTitle $hasDescription $hasPrimaryButton $hasSecondaryButton $hasFooter }}
+
+{{- if $hasContent }}
+<div class="post-cta">
+    <div class="cta-container">
+        {{- if $hasTitle }}
+        <h2 class="cta-title">{{ $title | markdownify }}</h2>
+        {{- end }}
+        
+        {{- if $hasDescription }}
+        <p class="cta-description">{{ $description | markdownify }}</p>
+        {{- end }}
+        
+        {{- if or $hasPrimaryButton $hasSecondaryButton }}
+        <div class="cta-buttons">
+            {{- if $hasPrimaryButton }}
+            <a href="{{ $primaryUrl | absURL }}" 
+               class="cta-button cta-button-primary"
+               {{- if $primaryExternal }} target="_blank" rel="noopener noreferrer"{{- end }}>
+                {{ $primaryText }}
+            </a>
+            {{- end }}
+            
+            {{- if $hasSecondaryButton }}
+            <a href="{{ $secondaryUrl | absURL }}" 
+               class="cta-button cta-button-secondary"
+               {{- if $secondaryExternal }} target="_blank" rel="noopener noreferrer"{{- end }}>
+                {{ $secondaryText }}
+            </a>
+            {{- end }}
+        </div>
+        {{- end }}
+        
+        {{- if $hasFooter }}
+        <p class="cta-footer">{{ $footerText | markdownify }}</p>
+        {{- end }}
+    </div>
+</div>
+{{- end }}
+
