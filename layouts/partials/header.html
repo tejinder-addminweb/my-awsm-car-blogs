@@ -1,0 +1,49 @@
+<header class="header">
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-container">
+                <a href="{{ site.Params.projectName | relURL }}" class="nav-brand">
+                    {{- $projectName := "" }}
+                    {{- if site.Params.projectName }}
+                        {{- $projectName = site.Params.projectName }}
+                    {{- else if .Site.Title }}
+                        {{- $projectName = .Site.Title }}
+                    {{- else }}
+                        {{- $baseURLPath := trim (replaceRE "https?://[^/]+/([^/]+)/?.*" "$1" .Site.BaseURL) "/" }}
+                        {{- if ne $baseURLPath "" }}
+                            {{- $projectName = $baseURLPath | title | replaceRE "-" " " }}
+                        {{- else }}
+                            {{- $projectName = "Blog" }}
+                        {{- end }}
+                    {{- end }}
+                    {{ $projectName }}
+                </a>
+                
+                <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                
+                <ul class="nav-menu" id="nav-menu">
+                    {{ range .Site.Menus.main }}
+                    <li>
+                        <a href="{{ .URL }}" class="nav-link {{ if $.IsMenuCurrent "main" . }}active{{ end }}">
+                            {{ .Name }}
+                        </a>
+                    </li>
+                    {{ end }}
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+{{- if not site.Params.disableThemeToggle }}
+<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2.69a1 1 0 0 0-1 0l-9 5a1 1 0 0 0-1 1.06L1 21a1 1 0 0 0 1 1h20a1 1 0 0 0 1-1v-12.25a1 1 0 0 0-1-1.06zM12 4.31l8 4.44v10.07l-8-4.44zm-10 0l8 4.44v10.07l-8-4.44z"/>
+    </svg>
+</button>
+{{- end }}
+
