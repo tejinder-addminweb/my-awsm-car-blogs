@@ -1,0 +1,22 @@
+<span class="post-meta-date">
+    {{ .Date.Format "January 2, 2006" }} | {{ .ReadingTime }} min read
+</span>
+
+{{- if .Params.categories }}
+    in
+    {{ range $index, $cat := .Params.categories }}
+        {{- if $index }}, {{ end }}
+        <a href="{{ "/categories/" | relURL }}{{ $cat | urlize }}">{{ $cat }}</a>
+    {{ end }}
+{{- end }}
+
+{{- if .Params.tags }}
+    {{ with .Params.tags }}
+        <span class="post-meta-separator"> â¢ </span>
+        {{ range $index, $tag := . }}
+            {{- if $index }}, {{ end }}
+            <a href="{{ "/tags/" | relURL }}{{ $tag | urlize }}">{{ $tag }}</a>
+        {{ end }}
+    {{ end }}
+{{- end }}
+
