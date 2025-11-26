@@ -1,0 +1,62 @@
+<article class="post-entry">
+    <div class="post-entry-image">
+        <a href="{{ .Permalink }}" rel="bookmark">
+            {{- $image := .Params.image | default .Params.featured_image }}
+            {{- if $image }}
+                <img src="{{ $image | absURL }}" alt="{{ .Params.image_alt | default .Title }}" />
+            {{- else }}
+                <div class="post-entry-image-placeholder">
+                    <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="100" height="100" fill="currentColor" opacity="0.1"/>
+                        <path d="M30 35L50 20L70 35V75H30V35Z" stroke="currentColor" stroke-width="2" fill="none" opacity="0.3"/>
+                        <circle cx="45" cy="45" r="5" fill="currentColor" opacity="0.3"/>
+                    </svg>
+                </div>
+            {{- end }}
+        </a>
+    </div>
+    
+    <div class="post-entry-content">
+        <header class="post-entry-header">
+            {{- if .Params.categories }}
+            <div class="post-entry-category">
+                {{ index .Params.categories 0 }}
+            </div>
+            {{- else if .Params.category }}
+            <div class="post-entry-category">
+                {{ .Params.category }}
+            </div>
+            {{- end }}
+            <h2 class="post-entry-title">
+                <a href="{{ .Permalink }}" rel="bookmark">{{ .Title }}</a>
+            </h2>
+            <div class="post-meta">
+                <time class="post-meta-date">{{ .Date.Format "January 2, 2006" }} | {{ .ReadingTime }} min read</time>
+            </div>
+        </header>
+        
+        {{- if .Description }}
+        <div class="post-entry-description">
+            {{ .Description | markdownify }}
+        </div>
+        {{- else if .Summary }}
+        <div class="post-entry-description">
+            {{ .Summary }}
+        </div>
+        {{- end }}
+        
+        <footer class="post-entry-footer">
+            <a href="{{ .Permalink }}" class="post-entry-read-more">
+                Read more <span class="read-more-arrow">â</span>
+            </a>
+            {{- if .Params.tags }}
+            <div class="post-entry-tags">
+                {{ range $index, $tag := .Params.tags }}
+                    <a href="{{ "/tags/" | relURL }}{{ $tag | urlize }}" class="tag">{{ $tag }}</a>
+                {{ end }}
+            </div>
+            {{- end }}
+        </footer>
+    </div>
+</article>
+
