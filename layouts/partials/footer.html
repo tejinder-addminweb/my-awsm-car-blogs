@@ -1,0 +1,29 @@
+{{- if not (.Param "hideFooter") }}
+<footer class="footer">
+    <div class="container">
+        {{- if not site.Params.footer.hideCopyright }}
+            <p class="footer-copyright">
+                Â© {{ now.Year }} 
+                <a href="{{ "" | absLangURL }}">{{ site.Title }}</a>
+            </p>
+        {{- end }}
+
+        {{- with site.Params.footer.text }}
+            <p class="footer-text">{{ . | markdownify }}</p>
+        {{- end }}
+        
+        {{- with site.Params.socialIcons }}
+            {{ partial "social_icons.html" . }}
+        {{- end }}
+    </div>
+</footer>
+{{- end }}
+
+{{- if (not site.Params.disableScrollToTop) }}
+<a href="#top" class="top-link" id="top-link" aria-label="Go to top" style="visibility: hidden; opacity: 0;">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+{{- end }}
+
