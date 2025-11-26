@@ -1,0 +1,23 @@
+{{ if or (.PrevInSection) (.NextInSection) }}
+<nav class="post-nav-links">
+    {{ with .PrevInSection }}
+    <div class="post-nav-link post-nav-link-prev">
+        <a href="{{ .Permalink }}">
+            
+            <span class="post-nav-link-label">Previous</span>
+            <span class="post-nav-link-title">{{ .Title }}</span>
+        </a>
+    </div>
+    {{ end }}
+    
+    {{ with .NextInSection }}
+    <div class="post-nav-link post-nav-link-next">
+        <a href="{{ .Permalink }}">
+            <span class="post-nav-link-label">Next</span>
+            <span class="post-nav-link-title">{{ .Title }}</span>
+        </a>
+    </div>
+    {{ end }}
+</nav>
+{{ end }}
+
