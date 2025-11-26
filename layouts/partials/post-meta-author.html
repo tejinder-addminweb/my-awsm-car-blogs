@@ -1,0 +1,6 @@
+{{- if .Params.author }}
+    <span class="post-meta-author">by {{ .Params.author }}</span>
+{{- else if .Site.Params.author }}
+    <span class="post-meta-author">by {{ .Site.Params.author }}</span>
+{{- end }}
+
