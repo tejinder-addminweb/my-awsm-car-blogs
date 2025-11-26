@@ -1,0 +1,86 @@
+# For local development
+# baseURL = '/'
+# For GitHub Pages deployment
+baseURL = "https://tejinder-addminweb.github.io/my-awsm-car-blogs/"
+languageCode = 'en-us'
+title = ''
+theme = []
+
+# Enable goldmark for better markdown processing
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.extensions]
+      definitionList = true
+      footnote = true
+      linkify = true
+      strikethrough = true
+      table = true
+      taskList = true
+      typographer = true
+  [markup.highlight]
+    style = 'github'
+    lineNos = true
+    codeFences = true
+    noClasses = false
+
+[pagination]
+  pagerSize = 10
+
+[params]
+  description = "A modern Hugo website built with minimal JavaScript and beautiful design"
+  author = "Tejinder"
+  # projectName = ""  # Optional: Set custom project name, otherwise uses site title or extracts from baseURL
+  mainSections = ["posts"]
+  
+  # SEO & Meta
+  showToc = true
+  showReadingTime = true
+  showPostNavLinks = true
+  showBreadcrumbs = true
+  showWordCount = true
+  showRssButtonInSectionTermList = true
+  showAllPostsInArchive = false
+  hideFooter = false
+  
+  # Theme settings
+  titleSeparator = "|"
+  themeVariant = "auto" # auto, light, dark
+  disableThemeToggle = false
+  disableScrollToTop = false
+  ShowCodeCopyButtons = true
+  
+  # Social links
+  [params.socialIcons]
+    email = "mailto:your@email.com"
+    github = "https://github.com/yourusername"
+    twitter = "https://twitter.com/yourusername"
+    linkedin = "https://linkedin.com/in/yourusername"
+  
+  # Homepage
+  [params.homeInfoParams]
+    Title = "Hi there ð"
+    Content = "Welcome to my blog! I'll be sharing thoughts, tutorials, and insights about web development, technology, and more."
+  
+  # Footer
+  [params.footer]
+    hideCopyright = false
+    text = "Built with â¤ï¸ and Hugo"
+  
+  # CTA (Call To Action) for blog posts
+  [params.cta]
+    title = "Enjoyed this article?"
+    description = "Get the latest posts delivered right to your inbox. Join our newsletter to stay updated with fresh content."
+    icon = "ð¬"
+    [params.cta.primaryButton]
+      text = "Subscribe to Newsletter"
+      url = "/newsletter"
+      external = false
+    footerText = "No spam, unsubscribe anytime."
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
