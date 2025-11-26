@@ -1,0 +1,10 @@
+{{- $question := .Get 0 | default (.Get "question") }}
+{{- $answer := .Inner | markdownify }}
+
+<details class="faq-item">
+    <summary class="faq-question">{{ $question }}</summary>
+    <div class="faq-answer">
+        {{ $answer }}
+    </div>
+</details>
+
