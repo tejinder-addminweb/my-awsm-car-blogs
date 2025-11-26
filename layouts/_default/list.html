@@ -1,0 +1,29 @@
+{{ define "main" }}
+<div class="container">
+    {{ if site.Params.showBreadcrumbs }}
+        {{ partial "breadcrumbs.html" . }}
+    {{ end }}
+    
+    <header class="post-header">
+        <h1 class="post-title">
+            {{ if .IsHome }}
+                {{ .Site.Title }}
+            {{ else }}
+                {{ .Page.Title }}
+            {{ end }}
+        </h1>
+        {{ with .Page.Description }}
+            <p class="post-description">{{ . }}</p>
+        {{ end }}
+    </header>
+    
+    <div class="post-list">
+        {{ range .Pages }}
+            {{ partial "post-entry.html" . }}
+        {{ end }}
+    </div>
+    
+    {{ partial "pagination.html" . }}
+</div>
+{{ end }}
+
