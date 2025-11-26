@@ -1,0 +1,18 @@
+<div class="social-icons">
+    {{- with site.Params.socialIcons.email }}
+    <a href="{{ . }}" aria-label="Email" class="social-icon">Email</a>
+    {{- end }}
+    
+    {{- with site.Params.socialIcons.github }}
+    <a href="{{ . }}" aria-label="GitHub" class="social-icon">GitHub</a>
+    {{- end }}
+    
+    {{- with site.Params.socialIcons.twitter }}
+    <a href="{{ . }}" aria-label="Twitter" class="social-icon">Twitter</a>
+    {{- end }}
+    
+    {{- with site.Params.socialIcons.linkedin }}
+    <a href="{{ . }}" aria-label="LinkedIn" class="social-icon">LinkedIn</a>
+    {{- end }}
+</div>
+
