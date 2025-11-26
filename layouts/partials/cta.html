@@ -1,0 +1,50 @@
+{{- if .IsPage }}
+{{- if not (.Param "hideCTA") }}
+{{- $cta := site.Params.cta }}
+{{- $hasTitle := $cta.title }}
+{{- $hasDescription := $cta.description }}
+{{- $hasPrimaryButton := and $cta.primaryButton (and $cta.primaryButton.text $cta.primaryButton.url) }}
+{{- $hasSecondaryButton := and $cta.secondaryButton (and $cta.secondaryButton.text $cta.secondaryButton.url) }}
+{{- $hasFooter := $cta.footerText }}
+{{- $hasContent := or $hasTitle $hasDescription $hasPrimaryButton $hasSecondaryButton $hasFooter }}
+
+{{- if $hasContent }}
+<div class="post-cta">
+    <div class="cta-container">
+        {{- if $hasTitle }}
+        <h2 class="cta-title">{{ $cta.title }}</h2>
+        {{- end }}
+        
+        {{- if $hasDescription }}
+        <p class="cta-description">{{ $cta.description | markdownify }}</p>
+        {{- end }}
+        
+        {{- if or $hasPrimaryButton $hasSecondaryButton }}
+        <div class="cta-buttons">
+            {{- if $hasPrimaryButton }}
+            <a href="{{ $cta.primaryButton.url | absURL }}" 
+               class="cta-button cta-button-primary"
+               {{- if $cta.primaryButton.external }} target="_blank" rel="noopener noreferrer"{{- end }}>
+                {{ $cta.primaryButton.text }}
+            </a>
+            {{- end }}
+            
+            {{- if $hasSecondaryButton }}
+            <a href="{{ $cta.secondaryButton.url | absURL }}" 
+               class="cta-button cta-button-secondary"
+               {{- if $cta.secondaryButton.external }} target="_blank" rel="noopener noreferrer"{{- end }}>
+                {{ $cta.secondaryButton.text }}
+            </a>
+            {{- end }}
+        </div>
+        {{- end }}
+        
+        {{- if $hasFooter }}
+        <p class="cta-footer">{{ $cta.footerText | markdownify }}</p>
+        {{- end }}
+    </div>
+</div>
+{{- end }}
+{{- end }}
+{{- end }}
+
