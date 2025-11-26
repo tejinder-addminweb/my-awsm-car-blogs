@@ -1,0 +1,32 @@
+{{ if ne .Kind "home" }}
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+    <ol class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a href="{{ "/" | relURL }}">Home</a>
+        </li>
+        {{ if ne .Kind "page" }}
+            <li class="breadcrumb-item">
+                <a href="{{ .Permalink }}">{{ .Title }}</a>
+            </li>
+        {{ else }}
+            {{ if .Parent }}
+                {{ if ne .Parent.Kind "home" }}
+                    {{ if ne .Parent.Kind "section" }}
+                        <li class="breadcrumb-item">
+                            <a href="{{ .Parent.Permalink }}">{{ .Parent.Title }}</a>
+                        </li>
+                    {{ else }}
+                        <li class="breadcrumb-item">
+                            <a href="{{ "/" | relURL }}{{ .Parent.Kind }}/">{{ title .Parent.Kind }}</a>
+                        </li>
+                    {{ end }}
+                {{ end }}
+            {{ end }}
+            <li class="breadcrumb-item">
+                <span>{{ .Title }}</span>
+            </li>
+        {{ end }}
+    </ol>
+</nav>
+{{ end }}
+
